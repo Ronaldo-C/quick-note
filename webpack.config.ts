@@ -6,13 +6,16 @@ const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 module.exports = {
   entry: {
-    popup: "./extension/popup.tsx",
+    index: "./extension/index.tsx",
     background: "./extension/background.ts",
   },
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
+  },
+  resolve: {
+    extensions: [".ts", ".tsx"],
   },
   module: {
     rules: [
@@ -29,11 +32,14 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./assets/index.html",
-      filename: "popup.html",
-      chunks: ["popup"],
+      filename: "index.html",
+      chunks: ["index"],
     }),
     new CopyPlugin({
-      patterns: [{ from: "extension/manifest.json", to: "[name].[ext]" }],
+      patterns: [
+        { from: "extension/manifest.json", to: "[name][ext]" },
+        { from: "assets/images", to: "images/" },
+      ],
     }),
     new ForkTsCheckerWebpackPlugin(),
   ],
