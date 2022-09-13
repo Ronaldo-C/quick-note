@@ -1,20 +1,45 @@
-import React, { FC, useState } from "react";
+import React, { FC, useContext, useMemo } from "react";
+import { useDrag } from "react-dnd";
+import { AppContext, ItemTypes, NoteActionType } from "../../common";
 import { BASE_COLOR } from "./constant";
 
-type TextAreaProps = {
-  onClick: () => void;
+export type TextAreaProps = {
+  id: number;
+  top: number;
+  left: number;
+  color: BASE_COLOR;
+  content: string;
 };
 
-export const TextArea: FC<TextAreaProps> = () => {
-  const [color, setColor] = useState(BASE_COLOR.red);
+export const TextArea: FC<TextAreaProps> = (props) => {
+  const { left, top, color, id, content } = props;
+  const { dispatch } = useContext(AppContext);
+
+  const [{ isDragging }, drag, preview] = useDrag({
+    type: ItemTypes.CARD,
+    item: props,
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
 
   const handleColor = (currentColor: BASE_COLOR) => {
-    setColor(currentColor);
+    dispatch({
+      type: NoteActionType.UPDATE,
+      payload: { id, color: currentColor },
+    });
   };
 
+  const styles = useMemo(() => {
+    return {
+      transform: `translate(${left}px, ${top}px)`,
+      opacity: isDragging ? 0 : 1,
+    };
+  }, [left, top, isDragging]);
+
   return (
-    <div className="w-80 h-[26rem] rounded-md">
-      <div className="bg-slate-50 h-6 rounded-t-md px-2">
+    <div className="flex flex-col w-80 absolute" ref={preview} style={styles}>
+      <div className="bg-slate-50 h-6 rounded-t-md px-2 cursor-move" ref={drag}>
         <div className="flex items-center h-full space-x-1.5">
           <button
             type="button"
@@ -34,7 +59,8 @@ export const TextArea: FC<TextAreaProps> = () => {
         </div>
       </div>
       <textarea
-        className={`w-full h-full resize-none focus-visible:outline-none text-base ${color}`}
+        className={`h-[26rem] rounded-b-md resize-none focus-visible:outline-none text-base ${color}`}
+        value={content}
       />
     </div>
   );

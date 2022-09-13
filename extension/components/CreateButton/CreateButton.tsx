@@ -1,15 +1,23 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import { PencilIcon } from "@heroicons/react/24/solid";
+import { AppContext, NoteActionType } from "../../common";
+import { BASE_COLOR } from "../TextArea/constant";
 
-type CreateButtonProps = {
-  onClick: () => void;
-};
+export const CreateButton: FC<{}> = () => {
+  const { dispatch } = useContext(AppContext);
 
-export const CreateButton: FC<CreateButtonProps> = () => {
+  const addNote = () => {
+    dispatch({
+      type: NoteActionType.ADD,
+      payload: { id: Date.now(), color: BASE_COLOR.red, left: 50, top: 50 },
+    });
+  };
+
   return (
     <button
       type="button"
       className="bg-black hover:bg-blue-700 text-white py-4 px-4 rounded-full absolute bottom-7 right-7"
+      onClick={addNote}
     >
       <PencilIcon className="w-6 h-6" />
     </button>
