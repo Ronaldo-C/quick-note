@@ -6,6 +6,8 @@ export const enum NoteActionType {
   ADD = "ADD",
   DELETE = "DELETE",
   UPDATE = "UPDATE",
+  UP = "UP",
+  INIT = "INIT",
 }
 
 export const enum ItemTypes {

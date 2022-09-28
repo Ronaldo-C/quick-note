@@ -1,7 +1,7 @@
 import React, { FC, useContext } from "react";
 import { PencilIcon } from "@heroicons/react/24/solid";
 import { AppContext, NoteActionType } from "../../common";
-import { BASE_COLOR } from "../TextArea/constant";
+import { BaseColor } from "../TextArea/constant";
 
 export const CreateButton: FC<{}> = () => {
   const { dispatch } = useContext(AppContext);
@@ -9,7 +9,7 @@ export const CreateButton: FC<{}> = () => {
   const addNote = () => {
     dispatch({
       type: NoteActionType.ADD,
-      payload: { id: Date.now(), color: BASE_COLOR.red, left: 50, top: 50 },
+      payload: { color: BaseColor.red, left: 50, top: 50 },
     });
   };
 
