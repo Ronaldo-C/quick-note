@@ -1,1 +1,0 @@
-# Notes extension for Google Chrome
