@@ -16,7 +16,7 @@ export const CreateButton: FC<{}> = () => {
   return (
     <button
       type="button"
-      className="bg-black hover:bg-blue-700 text-white py-4 px-4 rounded-full absolute bottom-7 right-7"
+      className="bg-black hover:bg-blue-700 text-white py-4 px-4 rounded-full fixed bottom-7 right-7"
       onClick={addNote}
     >
       <PencilIcon className="w-6 h-6" />

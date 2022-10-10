@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo } from "react";
-import { useDrop } from "react-dnd";
 import { useImmerReducer } from "use-immer";
 
-import { AppContext, ItemTypes, NoteActionType } from "./common";
+import { AppContext, NoteActionType } from "./common";
 import { CreateButton } from "./components/CreateButton";
 import { TextArea, TextAreaProps } from "./components/TextArea";
 
@@ -66,28 +65,9 @@ function App() {
 
   const ContextValue = useMemo(() => ({ state, dispatch }), [state, dispatch]);
 
-  const [, drop] = useDrop({
-    accept: ItemTypes.CARD,
-    drop(item: TextAreaProps, monitor) {
-      const delta = monitor.getDifferenceFromInitialOffset();
-
-      const left = Math.round(item.left + delta.x);
-      const top = Math.round(item.top + delta.y);
-
-      dispatch({
-        type: NoteActionType.UPDATE,
-        payload: { ...item, left, top, isUp: true },
-      });
-      dispatch({
-        type: NoteActionType.UP,
-        payload: { id: item.id },
-      });
-    },
-  });
-
   return (
     <AppContext.Provider value={ContextValue}>
-      <div className="h-full relative" ref={drop}>
+      <div className="h-full relative">
         <CreateButton />
         {state.map((item) => (
           <TextArea key={item.id} {...item} />
