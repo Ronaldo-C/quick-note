@@ -4,7 +4,7 @@ Sticky Note is an extension for Google Chrome, you can create and write notes an
 
 ## How to get started?
 
-### development
+### Development
 
 1. Clone the repository and install dependencies.
 2. Execute `pnpm run dev`.
