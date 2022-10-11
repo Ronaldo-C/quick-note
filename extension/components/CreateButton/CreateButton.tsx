@@ -1,16 +1,23 @@
-import React, { FC, useContext } from "react";
+import React, { FC, useCallback, useContext } from "react";
 import { PencilIcon } from "@heroicons/react/24/solid";
+import throttle from "lodash.throttle";
 import { AppContext, NoteActionType } from "../../common";
 import { BaseColor } from "../TextArea/constant";
 
 export const CreateButton: FC<{}> = () => {
   const { dispatch } = useContext(AppContext);
 
+  const throttleAddNote = useCallback(
+    throttle(() => {
+      dispatch({
+        type: NoteActionType.ADD,
+        payload: { color: BaseColor.red, left: 50, top: 50 },
+      });
+    }, 1000),
+    []
+  );
   const addNote = () => {
-    dispatch({
-      type: NoteActionType.ADD,
-      payload: { color: BaseColor.red, left: 50, top: 50 },
-    });
+    throttleAddNote();
   };
 
   return (

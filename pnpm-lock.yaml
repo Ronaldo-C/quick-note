@@ -25,6 +25,7 @@ specifiers:
   husky: ^8.0.1
   immer: ^9.0.15
   lint-staged: ^13.0.3
+  lodash.throttle: ^4.1.1
   postcss: ^8.4.16
   postcss-loader: ^7.0.1
   postcss-preset-env: ^7.8.0
@@ -46,6 +47,7 @@ specifiers:
 dependencies:
   '@heroicons/react': 2.0.10_react@18.2.0
   immer: 9.0.15
+  lodash.throttle: 4.1.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-draggable: 4.4.5_biqbaboplfbrettd7655fr4n2y
@@ -3176,6 +3178,10 @@ packages:
   /lodash.merge/4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
+
+  /lodash.throttle/4.1.1:
+    resolution: {integrity: sha512-wIkUCfVKpVsWo3JSZlc+8MB5it+2AN5W8J7YVMST30UrvcQNZ1Okbj+rbVniijTWE6FGYy4XJq/rHkas8qJMLQ==}
+    dev: false
 
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
